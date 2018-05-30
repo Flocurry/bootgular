@@ -8,7 +8,7 @@ export class RolesService {
 
   constructor(private _http: HttpClient) { }
 
-  public getAllRoles(){
+  getAllRoles(){
     return this._http.get('http://localhost/roles');
   }
 
@@ -16,11 +16,11 @@ export class RolesService {
    * Création d'un role
    * @param role : Objet Roles
    */
-  public addRole (role: Roles): Observable<Roles> {
+  addRole (role: Roles): Observable<Roles> {
     return this._http.post<Roles>('http://localhost/roles/save', role);
   }
 
-  public deleteRoleById(id: number){
+  deleteRoleById(id: number){
     return this._http.get('http://localhost/roles/delete/'+id);
   }
 

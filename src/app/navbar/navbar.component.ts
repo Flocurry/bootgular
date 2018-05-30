@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
     this.usernameLogin = this._sharingService.getSettings('usernameLogged');
   }
 
-  public logout(){
+  logout(){
     this._sharingService.clearSettings('usernameLogged');
     this._route.navigate(['login']);
   }

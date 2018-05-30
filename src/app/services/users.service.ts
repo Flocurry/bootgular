@@ -15,7 +15,7 @@ export class UsersService {
   /**
    * Récuération des users
    */
-  public getAllUsers(){
+  getAllUsers(){
     return this._http.get('http://localhost/users');
   }
 
@@ -24,7 +24,7 @@ export class UsersService {
    * 
    * @param user : Objet User
    */
-  public isUserExists(user: Users){
+  isUserExists(user: Users){
     return this._http.post('http://localhost/login/user', user);
   }
 
@@ -33,7 +33,7 @@ export class UsersService {
    * 
    * @param id : Id du user
    */
-  public deleteUsersById(id: number){
+  deleteUsersById(id: number){
     return this._http.get('http://localhost/users/delete/'+id);
   }
 
@@ -41,7 +41,7 @@ export class UsersService {
    * Création d'un user
    * @param user : Objet User
    */
-  public addUser (user: Users): Observable<Users> {
+  addUser (user: Users): Observable<Users> {
     return this._http.post<Users>('http://localhost/users/save', user);
   }
 
@@ -50,11 +50,11 @@ export class UsersService {
     return Observable.throw(error);
   }
 
-  public setUserLogged(username){
+  setUserLogged(username){
     this.userLogged = username;
   }
 
-  public getUserLogged(){
+  getUserLogged(){
     return this.userLogged;
   }
 }
