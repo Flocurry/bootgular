@@ -14,6 +14,9 @@
               </button>
             </div>
           </div>
+          <div *ngIf="messageDelete" class="alert alert-danger">
+            <strong>Fail!</strong> {{messageDelete}}.
+          </div>
         </div>
         <div class="panel-body">
           <table class="table table-striped table-bordered table-list">
@@ -28,7 +31,7 @@
               <tr *ngFor='let role of allRoles'>
                 <td align="center">
                   <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                  <button (click)="deleteUsers(user)" class="btn btn-danger"><em class="fa fa-trash"></em></button>
+                  <button (click)="deleteRoles(role)" class="btn btn-danger"><em class="fa fa-trash"></em></button>
                 </td>
                 <td>{{role.role_id}}</td>
                 <td>{{role.libelle}}</td>
@@ -89,17 +92,12 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="form-group row">
-                <div class="offset-sm-2 col-sm-8 pb-3 pt-2">
-                    <button type="submit" class="btn btn-secondary-outline btn-lg btn-block" [disabled]="!registerForm.valid">Register</button>
-                </div>
-            </div> -->
           </fieldset>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!createRoleForm.valid">Create</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" [disabled]="!createRoleForm.valid">Create</button>
       </div>
     </div>
   </div>

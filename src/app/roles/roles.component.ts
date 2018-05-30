@@ -10,7 +10,9 @@ import { RolesService } from '../services/roles.service';
   styleUrls: ['./roles.component.css']
 })
 export class RolesComponent implements OnInit {
-  cerateRoleForm: FormGroup;
+  createRoleForm: FormGroup;
+  statusCode: number;
+  messageDelete: string;
   allRoles: Roles[] = [];
   statut: boolean = false;
   iscreated: boolean = false;
@@ -19,7 +21,7 @@ export class RolesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllRoles();
-    this.cerateRoleForm = this._formBuilder.group({
+    this.createRoleForm = this._formBuilder.group({
       'libelle' : ['', Validators.required]
     });
   }
@@ -34,14 +36,31 @@ export class RolesComponent implements OnInit {
   }
 
   // Post new role
-  addUsers(f: NgForm){
+  addRoles(f: NgForm){
     this._rolesService.addRole(f.value).subscribe(res => 
       {
         this.statut = res['successAdd'];
         this.iscreated = true;
+        this.getAllRoles();
       });
     // // Réinitialiser le formulaire
     // this.cerateRoleForm.reset();
-}
+  }
+
+  // Delete role by id
+  deleteRoles(role: Roles) {
+    this._rolesService.deleteRoleById(role.role_id)
+      .subscribe(datas => {
+        this.statusCode = 204;
+        if(datas['successDelete']){
+          this.messageDelete = "";
+          this.getAllRoles();
+        }
+        else{
+          this.messageDelete = datas['message'];
+        }
+      },
+      errorCode => this.statusCode = errorCode);    
+  }
 
 }

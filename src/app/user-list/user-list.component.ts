@@ -32,7 +32,7 @@ export class UserListComponent implements OnInit {
   }
 
   // Delete user by id
-  deleteUsers(user: Users) {
+  deleteUsers(user: Users) {  
     this._usersService.deleteUsersById(user.user_id)
       .subscribe(datas => {
         this.statusCode = 204;
@@ -42,7 +42,7 @@ export class UserListComponent implements OnInit {
         else{
           console.log('Fail delete');
         }
-  },
-  errorCode => this.statusCode = errorCode);    
- }
+    },
+    errorCode => this.statusCode = errorCode);    
+  }
 }
