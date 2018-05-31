@@ -26,7 +26,8 @@ export class UsersService {
    * @param user : Objet User
    */
   isUserExists(user: Users){
-    return this._http.post('http://localhost/login/user', user);
+    let params = new HttpParams().set("username", user.username).set("password", user.password);
+    return this._http.get('http://localhost/login/user', {params: params});
   }
 
   /**
