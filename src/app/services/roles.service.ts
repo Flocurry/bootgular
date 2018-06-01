@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Roles } from '../shared/models/roles';
+import { SharingService } from './sharing.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class RolesService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _cookieService: CookieService, private _sharingService: SharingService, private _http: HttpClient) { }
 
   getAllRoles(){
     return this._http.get('http://localhost/roles');
@@ -21,7 +23,10 @@ export class RolesService {
   }
 
   deleteRoleById(id: number){
-    return this._http.delete('http://localhost/roles/delete/'+id);
+    console.log(this._sharingService.getSettings('token'));
+    let headers = new HttpHeaders().set('X-CSRF-TOKEN', this._sharingService.getSettings('token'));
+    return this._http.delete('http://localhost/roles/delete/'+id, {headers:headers});
+    // return this._http.delete('http://localhost/roles/delete/'+id);
   }
 
 }

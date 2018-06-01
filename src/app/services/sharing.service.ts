@@ -10,7 +10,7 @@ export class SharingService {
   }
 
   getSettings(key: string){
-    return localStorage.getItem('usernameLogged');
+    return localStorage.getItem(key);
   }
 
   clearSettings(key: string){

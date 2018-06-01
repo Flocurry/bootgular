@@ -12,11 +12,12 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserComponent } from './user/user.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClientXsrfModule } from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RolesComponent } from './roles/roles.component';
 import { SpectaclesComponent } from './spectacles/spectacles.component';
+import { CookieService } from 'ngx-cookie-service';
 // Services
 import { UsersService } from "./services/users.service";
 import { RolesService } from "./services/roles.service";
@@ -59,9 +60,17 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'X-XSRF-TOKEN',
+      headerName: 'X-XSRF-TOKEN',
+    }),
   ],
-  providers: [UsersService, RolesService, SharingService],
+  providers: [
+  CookieService,
+  UsersService, 
+  RolesService, 
+  SharingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

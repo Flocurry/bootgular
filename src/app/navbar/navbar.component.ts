@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     this._sharingService.clearSettings('usernameLogged');
+    this._sharingService.clearSettings('token');
     this._route.navigate(['login']);
   }
 }

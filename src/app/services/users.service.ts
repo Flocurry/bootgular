@@ -27,7 +27,7 @@ export class UsersService {
    */
   isUserExists(user: Users){
     let params = new HttpParams().set("username", user.username).set("password", user.password);
-    return this._http.get('http://localhost/login/user', {params: params});
+    return this._http.get('http://localhost/login/user', {params: params, withCredentials:true});
   }
 
   /**

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Users } from '../shared/models/users';
 import { NavbarComponent } from '../navbar/navbar.component';
 // Services
+import { CookieService } from 'ngx-cookie-service';
 import { UsersService } from '../services/users.service';
 import { SharingService } from '../services/sharing.service';
 
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   isLoginClick: Boolean = false;
   userExist: Boolean = false;
 
-  constructor(private _usersService: UsersService, private _sharingService: SharingService, private _route: Router) { }
+  constructor(private cookieService: CookieService, private _usersService: UsersService, private _sharingService: SharingService, private _route: Router) { }
 
   ngOnInit() {
     this.user = new Users();
@@ -28,6 +29,10 @@ export class LoginComponent implements OnInit {
     this._usersService.isUserExists(f.value).subscribe(
       res => {
         this.userExist = res['successLogin'];
+        // On stocke le token xsrf
+        this._sharingService.clearSettings('token');
+        // console.log(this.cookieService.get('XSRF-TOKEN'));
+        this._sharingService.setSettings('token', this.cookieService.get('XSRF-TOKEN'));
         this.isLoginClick = true;
         // Redirection vers home si login ok
         if(this.userExist){
