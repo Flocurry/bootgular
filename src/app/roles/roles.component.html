@@ -50,19 +50,21 @@
             <div class="col col-xs-4">Page {{pager.currentPage}} of {{pager.totalPages}}
             </div>
             <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
-                  <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
-                </li>
-                <div *ngFor="let page of pager.pages">
-                  <li class="page-item" [ngClass]="{active:pager.currentPage === page}">
-                    <a (click)="setPage(page)" class="page-link">{{page}}</a>
+              <div class="col col-xs-6 text-right">
+                <ul class="pagination">
+                  <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+                    <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
                   </li>
-                </div>
-                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
-                  <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
-                </li>
-              </ul>
+                  <div *ngFor="let page of pager.pages">
+                    <li class="page-item" [ngClass]="{active:pager.currentPage === page}">
+                      <a (click)="setPage(page)" class="page-link">{{page}}</a>
+                    </li>
+                  </div>
+                  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+                    <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
+                  </li>
+                </ul>
+              </div>
             </nav>
           </div>
         </div>
