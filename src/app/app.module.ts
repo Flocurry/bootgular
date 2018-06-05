@@ -22,24 +22,29 @@ import { CookieService } from 'ngx-cookie-service';
 import { UsersService } from "./services/users.service";
 import { RolesService } from "./services/roles.service";
 import { SharingService } from "./services/sharing.service";
+import { PagerService } from "./services/pager.service";
 
 const appRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'roles', component: RolesComponent},
-  {path: 'spectacles', component: SpectaclesComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'about', component: AboutComponent},
-  {path: 'user', children: [
-    {path: 'list', component: UserListComponent, children: [
-      {path: 'detail/:name', component: UserComponent}
-    ]}
-  ]},
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: '**', redirectTo: '/login', pathMatch: 'full'}
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'roles', component: RolesComponent },
+  { path: 'spectacles', component: SpectaclesComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  {
+    path: 'user', children: [
+      {
+        path: 'list', component: UserListComponent, children: [
+          { path: 'detail/:name', component: UserComponent }
+        ]
+      }
+    ]
+  },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ]
 
-@NgModule({ 
+@NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
@@ -67,10 +72,11 @@ const appRoutes: Routes = [
     }),
   ],
   providers: [
-  CookieService,
-  UsersService, 
-  RolesService, 
-  SharingService],
+    CookieService,
+    UsersService,
+    RolesService,
+    SharingService,
+    PagerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

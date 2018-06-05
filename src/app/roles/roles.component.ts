@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Roles } from '../shared/models/roles';
 // Services
 import { RolesService } from '../services/roles.service';
+import { PagerService } from '../services/pager.service';
 
 @Component({
   selector: 'app-roles',
@@ -10,6 +11,12 @@ import { RolesService } from '../services/roles.service';
   styleUrls: ['./roles.component.css']
 })
 export class RolesComponent implements OnInit {
+  // For the pagination
+  // pager object
+  pager: any = {};
+  // paged items
+  pagedItems: any[];
+
   createRoleForm: FormGroup;
   statusCode: number;
   messageDelete: string;
@@ -17,7 +24,7 @@ export class RolesComponent implements OnInit {
   statut: boolean = false;
   iscreated: boolean = false;
 
-  constructor(private _formBuilder: FormBuilder, private _rolesService: RolesService) { }
+  constructor(private _formBuilder: FormBuilder, private _rolesService: RolesService, private _pagerService: PagerService) { }
 
   ngOnInit() {
     this.getAllRoles();
@@ -31,6 +38,7 @@ export class RolesComponent implements OnInit {
     this._rolesService.getAllRoles().subscribe(
       (datas: Roles[]) => {
         this.allRoles = datas;
+        this.setPage(1);
       }
     );
   }
@@ -66,6 +74,13 @@ export class RolesComponent implements OnInit {
   resetModalForm(){
     this.iscreated = false;
     this.createRoleForm.reset();
+  }
+
+  setPage(page: number) {
+    // get pager object from service
+    this.pager = this._pagerService.getPager(this.allRoles.length, page, 5);
+    // get current page of items
+    this.pagedItems = this.allRoles.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
 }

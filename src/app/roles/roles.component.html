@@ -10,7 +10,7 @@
             </div>
             <div class="col col-xs-6 text-right">
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                  Create New
+                Create New
               </button>
             </div>
           </div>
@@ -22,16 +22,22 @@
           <table class="table table-striped table-bordered table-list">
             <thead>
               <tr>
-                <th><em class="fa fa-cog"></em></th>
+                <th>
+                  <em class="fa fa-cog"></em>
+                </th>
                 <th class="hidden-xs">ID</th>
                 <th>Libellé</th>
-              </tr> 
+              </tr>
             </thead>
             <tbody>
-              <tr *ngFor='let role of allRoles'>
+              <tr *ngFor='let role of pagedItems'>
                 <td align="center">
-                  <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
-                  <button (click)="deleteRoles(role)" class="btn btn-danger"><em class="fa fa-trash"></em></button>
+                  <a class="btn btn-default">
+                    <em class="fa fa-pencil"></em>
+                  </a>
+                  <button (click)="deleteRoles(role)" class="btn btn-danger">
+                    <em class="fa fa-trash"></em>
+                  </button>
                 </td>
                 <td>{{role.role_id}}</td>
                 <td>{{role.libelle}}</td>
@@ -41,21 +47,30 @@
         </div>
         <div class="panel-footer">
           <div class="row">
-            <div class="col col-xs-4">Page 1 of 5
+            <div class="col col-xs-4">Page {{pager.currentPage}} of {{pager.totalPages}}
             </div>
             <div class="col col-xs-8">
-              <ul class="pagination hidden-xs pull-right">
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+              <!-- items being paged -->
+              <div *ngFor="let item of pagedItems">{{item.name}}</div>
+              <!-- pager -->
+              <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(1)">First</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                  <a (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                  <a (click)="setPage(pager.totalPages)">Last</a>
+                </li>
               </ul>
-              <ul class="pagination visible-xs pull-right">
-                <li><a href="#">«</a></li>
-                <li><a href="#">»</a></li>
-              </ul>
-            </div>  
+            </div>
           </div>
         </div>
       </div>
@@ -65,7 +80,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">New Role</h5>
@@ -76,10 +91,10 @@
       <div class="modal-body">
         <form [formGroup]="createRoleForm" (ngSubmit)="addRoles(createRoleForm)">
           <div *ngIf="statut && iscreated" class="alert alert-success">
-              <strong>Success!</strong> The role has been  created.
+            <strong>Success!</strong> The role has been created.
           </div>
           <div *ngIf="!statut && iscreated" class="alert alert-danger">
-              <strong>Fail!</strong> The role has not been created.
+            <strong>Fail!</strong> The role has not been created.
           </div>
           <fieldset>
             <div class="form-group row">
@@ -87,8 +102,8 @@
                 <input formControlName="libelle" type="text" class="form-control" id="input2LibelleForm" placeholder="role">
                 <div class="alert-danger" *ngIf="!createRoleForm.controls['libelle'].valid && createRoleForm.controls['libelle'].touched">
                   <div [hidden]="!createRoleForm.controls['libelle'].errors.required">
-                      Libelle is required.
-                  </div>    
+                    Libelle is required.
+                  </div>
                 </div>
               </div>
             </div>
