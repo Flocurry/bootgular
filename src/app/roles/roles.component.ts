@@ -43,8 +43,8 @@ export class RolesComponent implements OnInit {
         this.iscreated = true;
         this.getAllRoles();
       });
-    // // Réinitialiser le formulaire
-    // this.cerateRoleForm.reset();
+    // Réinitialiser le formulaire
+    // this.createRoleForm.reset();
   }
 
   // Delete role by id
@@ -61,6 +61,11 @@ export class RolesComponent implements OnInit {
         }
       },
       errorCode => this.statusCode = errorCode);    
+  }
+
+  resetModalForm(){
+    this.iscreated = false;
+    this.createRoleForm.reset();
   }
 
 }
