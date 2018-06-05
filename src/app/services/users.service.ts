@@ -26,8 +26,11 @@ export class UsersService {
    * @param user : Objet User
    */
   isUserExists(user: Users){
+    let headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    headers.set('Access-Control-Allow-Origin', '*'); 
     let params = new HttpParams().set("username", user.username).set("password", user.password);
-    return this._http.get('http://localhost/login/user', {params: params, withCredentials:true});
+    return this._http.get('http://localhost/login/user', {params: params, headers: headers});
   }
 
   /**
