@@ -38,7 +38,10 @@ export class RolesComponent implements OnInit {
     this._rolesService.getAllRoles().subscribe(
       (datas: Roles[]) => {
         this.allRoles = datas;
-        this.setPage(1);
+        if(!this.pager.currentPage){
+          this.pager.currentPage = 1;
+        }
+        this.setPage(this.pager.currentPage);
       }
     );
   }
@@ -51,8 +54,6 @@ export class RolesComponent implements OnInit {
         this.iscreated = true;
         this.getAllRoles();
       });
-    // Réinitialiser le formulaire
-    // this.createRoleForm.reset();
   }
 
   // Delete role by id
