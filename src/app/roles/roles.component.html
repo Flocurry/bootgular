@@ -49,28 +49,21 @@
           <div class="row">
             <div class="col col-xs-4">Page {{pager.currentPage}} of {{pager.totalPages}}
             </div>
-            <div class="col col-xs-8">
-              <!-- items being paged -->
-              <div *ngFor="let item of pagedItems">{{item.name}}</div>
-              <!-- pager -->
-              <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-                <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPage(1)">First</a>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item">
+                  <a (click)="setPage(pager.currentPage - 1)" class="page-link">Previous</a>
                 </li>
-                <li [ngClass]="{disabled:pager.currentPage === 1}">
-                  <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-                </li>
-                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                  <a (click)="setPage(page)">{{page}}</a>
-                </li>
-                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPage(pager.currentPage + 1)">Next</a>
-                </li>
-                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                  <a (click)="setPage(pager.totalPages)">Last</a>
+                <div *ngFor="let page of pager.pages">
+                  <li class="page-item" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="setPage(page)" class="page-link">{{page}}</a>
+                  </li>
+                </div>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item">
+                  <a (click)="setPage(pager.currentPage + 1)" class="page-link">Next</a>
                 </li>
               </ul>
-            </div>
+            </nav>
           </div>
         </div>
       </div>
