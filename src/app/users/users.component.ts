@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from "../services/users.service";
 import { Users } from '../shared/models/users';
+// Services
+import { UsersService } from '../services/users.service';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
 })
-export class UserListComponent implements OnInit {
+export class UsersComponent implements OnInit {
 
+  
   // Component properties
   allUsers: Users[] = [];
   statusCode: number;
@@ -45,4 +47,6 @@ export class UserListComponent implements OnInit {
     },
     errorCode => this.statusCode = errorCode);    
   }
+
+
 }

@@ -7,17 +7,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { JumbotronComponent } from './jumbotron/jumbotron.component';
 import { FooterComponent } from './footer/footer.component';
-import { MatcalculComponent } from './matcalcul/matcalcul.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { UserComponent } from './user/user.component';
-import { HttpClientModule, HttpClientXsrfModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RolesComponent } from './roles/roles.component';
 import { SpectaclesComponent } from './spectacles/spectacles.component';
 import { CookieService } from 'ngx-cookie-service';
+import { UsersComponent } from './users/users.component';
 // Services
 import { UsersService } from "./services/users.service";
 import { RolesService } from "./services/roles.service";
@@ -27,19 +25,20 @@ import { PagerService } from "./services/pager.service";
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'users', component: UsersComponent },
   { path: 'roles', component: RolesComponent },
   { path: 'spectacles', component: SpectaclesComponent },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  {
-    path: 'user', children: [
-      {
-        path: 'list', component: UserListComponent, children: [
-          { path: 'detail/:name', component: UserComponent }
-        ]
-      }
-    ]
-  },
+  // {
+  //   path: 'user', children: [
+  //     {
+  //       path: 'list', component: UserListComponent, children: [
+  //         { path: 'detail/:name', component: UserComponent }
+  //       ]
+  //     }
+  //   ]
+  // },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ]
@@ -50,26 +49,21 @@ const appRoutes: Routes = [
     NavbarComponent,
     JumbotronComponent,
     FooterComponent,
-    MatcalculComponent,
     HomeComponent,
     AboutComponent,
-    UserListComponent,
-    UserComponent,
+    UsersComponent,
     LoginComponent,
     RegisterComponent,
     SpectaclesComponent,
-    RolesComponent
+    RolesComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'X-XSRF-TOKEN',
-      headerName: 'X-XSRF-TOKEN',
-    }),
+    HttpClientModule
   ],
   providers: [
     CookieService,
