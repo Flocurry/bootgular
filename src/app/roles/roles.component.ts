@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Roles } from '../shared/models/roles';
 // Services
@@ -26,6 +26,9 @@ export class RolesComponent implements OnInit {
   statut: boolean = false;
   iscreated: boolean = false;
   editClicked: boolean = false;
+
+  // Closed the modal edit role after save ok
+  @ViewChild('idBtnCloseEditModal') closeModalEdit: ElementRef;
 
   constructor(private _formBuilder: FormBuilder, private _rolesService: RolesService, private _pagerService: PagerService) { }
 
@@ -100,17 +103,19 @@ export class RolesComponent implements OnInit {
       'role_id': [role.role_id, Validators.required],
       'libelle': [role.libelle, Validators.required]
     });
-    console.log(role);
     this.editRole = role;
     this.editClicked = true;
   }
 
   editRoles(f: NgForm) {
-    console.log(f.value);
-    
     this._rolesService.editRole(f.value).subscribe(res => {
       this.statut = res['successEdit'];
-      this.getAllRoles();
+      // Si l'édition est ok
+      if (this.statut) {
+        this.getAllRoles();
+        // Fermer la modal
+        this.closeModalEdit.nativeElement.click();
+      }
     });
   }
 

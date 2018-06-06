@@ -145,7 +145,7 @@
             </div>
           </fieldset>
           <div class="modal-footer">
-            <button (click)="resetModalFormEditRole()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button #idBtnCloseEditModal (click)="resetModalFormEditRole()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" [disabled]="!editRoleForm.valid">Save</button>
           </div>
         </form>
