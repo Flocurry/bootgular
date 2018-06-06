@@ -9,7 +9,7 @@
               <h3 class="panel-title">Roles</h3>
             </div>
             <div class="col col-xs-6 text-right">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRoleModal">
                 Create New
               </button>
             </div>
@@ -32,7 +32,7 @@
             <tbody>
               <tr *ngFor='let role of pagedItems'>
                 <td align="center">
-                  <a class="btn btn-default">
+                  <a (click)="showEditModal(role)" class="btn btn-default" data-toggle="modal" data-target="#editRoleModal">
                     <em class="fa fa-pencil"></em>
                   </a>
                   <button (click)="deleteRoles(role)" class="btn btn-danger">
@@ -73,12 +73,12 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal New Role-->
+<div class="modal fade" id="createRoleModal" tabindex="-1" role="dialog" aria-labelledby="createRoleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New Role</h5>
+        <h5 class="modal-title" id="createRoleModalLabel">New Role</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -104,8 +104,49 @@
             </div>
           </fieldset>
           <div class="modal-footer">
-            <button (click)="resetModalForm()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button (click)="resetModalFormNewRole()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" [disabled]="!createRoleForm.valid">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Role-->
+<div class="modal fade" id="editRoleModal" tabindex="-1" role="dialog" aria-labelledby="editRoleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editRoleModalLabel">Edit Role</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editRoleForm" (ngSubmit)="editRoles(editRoleForm)">
+          <div *ngIf="statut && iscreated" class="alert alert-success">
+            <strong>Success!</strong> The role has been saved.
+          </div>
+          <div *ngIf="!statut && iscreated" class="alert alert-danger">
+            <strong>Fail!</strong> The role has not been saved.
+          </div>
+          <fieldset>
+            <div class="form-group row">
+              <div class="offset-sm-2 col-sm-8">
+                <input *ngIf="editClicked" type="hidden" class="form-control" value="{{editRole.role_id}}">
+                <input *ngIf="editClicked" formControlName="libelle" type="text" class="form-control" id="input2LibelleForm" value="{{editRole.libelle}}">
+                <div class="alert-danger" *ngIf="!editRoleForm.controls['libelle'].valid && editRoleForm.controls['libelle'].touched">
+                  <div [hidden]="!editRoleForm.controls['libelle'].errors.required">
+                    Libelle is required.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <div class="modal-footer">
+            <button (click)="resetModalFormEditRole()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!editRoleForm.valid">Save</button>
           </div>
         </form>
       </div>

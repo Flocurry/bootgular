@@ -18,27 +18,34 @@ export class RolesComponent implements OnInit {
   pagedItems: any[];
 
   createRoleForm: FormGroup;
+  editRoleForm: FormGroup;
   statusCode: number;
   messageDelete: string;
   allRoles: Roles[] = [];
+  editRole: Roles;
   statut: boolean = false;
   iscreated: boolean = false;
+  editClicked: boolean = false;
 
   constructor(private _formBuilder: FormBuilder, private _rolesService: RolesService, private _pagerService: PagerService) { }
 
   ngOnInit() {
     this.getAllRoles();
     this.createRoleForm = this._formBuilder.group({
-      'libelle' : ['', Validators.required]
+      'libelle': ['', Validators.required]
+    });
+    this.editRoleForm = this._formBuilder.group({
+      'role_id': ['', Validators.required],
+      'libelle': ['', Validators.required]
     });
   }
 
   // Get all roles
-  getAllRoles(){
+  getAllRoles() {
     this._rolesService.getAllRoles().subscribe(
       (datas: Roles[]) => {
         this.allRoles = datas;
-        if(!this.pager.currentPage){
+        if (!this.pager.currentPage) {
           this.pager.currentPage = 1;
         }
         this.setPage(this.pager.currentPage);
@@ -47,13 +54,12 @@ export class RolesComponent implements OnInit {
   }
 
   // Post new role
-  addRoles(f: NgForm){
-    this._rolesService.addRole(f.value).subscribe(res => 
-      {
-        this.statut = res['successAdd'];
-        this.iscreated = true;
-        this.getAllRoles();
-      });
+  addRoles(f: NgForm) {
+    this._rolesService.addRole(f.value).subscribe(res => {
+      this.statut = res['successAdd'];
+      this.iscreated = true;
+      this.getAllRoles();
+    });
   }
 
   // Delete role by id
@@ -61,20 +67,25 @@ export class RolesComponent implements OnInit {
     this._rolesService.deleteRoleById(role.role_id)
       .subscribe(datas => {
         this.statusCode = 204;
-        if(datas['successDelete']){
+        if (datas['successDelete']) {
           this.messageDelete = "";
           this.getAllRoles();
         }
-        else{
+        else {
           this.messageDelete = datas['message'];
         }
       },
-      errorCode => this.statusCode = errorCode);    
+        errorCode => this.statusCode = errorCode);
   }
 
-  resetModalForm(){
+  resetModalFormNewRole() {
     this.iscreated = false;
     this.createRoleForm.reset();
+  }
+
+  resetModalFormEditRole() {
+    this.editClicked = false;
+    this.editRoleForm.reset();
   }
 
   setPage(page: number) {
@@ -82,6 +93,25 @@ export class RolesComponent implements OnInit {
     this.pager = this._pagerService.getPager(this.allRoles.length, page, 5);
     // get current page of items
     this.pagedItems = this.allRoles.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  }
+
+  showEditModal(role: Roles) {
+    this.editRoleForm = this._formBuilder.group({
+      'role_id': [role.role_id, Validators.required],
+      'libelle': [role.libelle, Validators.required]
+    });
+    console.log(role);
+    this.editRole = role;
+    this.editClicked = true;
+  }
+
+  editRoles(f: NgForm) {
+    console.log(f.value);
+    
+    this._rolesService.editRole(f.value).subscribe(res => {
+      this.statut = res['successEdit'];
+      this.getAllRoles();
+    });
   }
 
 }

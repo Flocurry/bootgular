@@ -10,7 +10,7 @@ export class RolesService {
 
   constructor(private _cookieService: CookieService, private _sharingService: SharingService, private _http: HttpClient) { }
 
-  getAllRoles(){
+  getAllRoles() {
     return this._http.get('http://localhost/roles');
   }
 
@@ -18,15 +18,25 @@ export class RolesService {
    * CrÃ©ation d'un role
    * @param role : Objet Roles
    */
-  addRole (role: Roles): Observable<Roles> {
+  addRole(role: Roles): Observable<Roles> {
     return this._http.post<Roles>('http://localhost/roles/save', role);
   }
 
-  deleteRoleById(id: number){
-    console.log(this._sharingService.getSettings('token'));
+  /**
+   * Suppression d'un rôle
+   * @param id : Id du rôle à supprimer
+   */
+  deleteRoleById(id: number) {
     let headers = new HttpHeaders().set('X-CSRF-TOKEN', this._sharingService.getSettings('token'));
-    return this._http.delete('http://localhost/roles/delete/'+id, {headers:headers});
-    // return this._http.delete('http://localhost/roles/delete/'+id);
+    return this._http.delete('http://localhost/roles/delete/' + id, { headers: headers });
+  }
+
+  /**
+   * Edition d'un rôle
+   * @param role 
+   */
+  editRole(role: Roles) {
+    return this._http.put<Roles>('http://localhost/roles/edit', role);
   }
 
 }
