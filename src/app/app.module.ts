@@ -21,6 +21,7 @@ import { UsersService } from "./services/users.service";
 import { RolesService } from "./services/roles.service";
 import { SharingService } from "./services/sharing.service";
 import { PagerService } from "./services/pager.service";
+import { ModalComponent } from './modal/modal.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -56,7 +57,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     SpectaclesComponent,
     RolesComponent,
-    UsersComponent
+    UsersComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

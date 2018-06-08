@@ -9,7 +9,7 @@
               <h3 class="panel-title">Roles</h3>
             </div>
             <div class="col col-xs-6 text-right">
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createRoleModal">
+              <button (click)="showCreateModal()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#idModal">
                 Create New
               </button>
             </div>
@@ -32,7 +32,7 @@
             <tbody>
               <tr *ngFor='let role of pagedItems'>
                 <td align="center">
-                  <a (click)="showEditModal(role)" class="btn btn-default" data-toggle="modal" data-target="#editRoleModal">
+                  <a (click)="showEditModal(role)" class="btn btn-default" data-toggle="modal" data-target="#idModal">
                     <em class="fa fa-pencil"></em>
                   </a>
                   <button (click)="deleteRoles(role)" class="btn btn-danger">
@@ -72,9 +72,9 @@
     </div>
   </div>
 </div>
-
+<app-modal [titleModalChild]="titleModalParent" [labelSaveBtnChild]="labelBtnSaveParent" ></app-modal>
 <!-- Modal New Role-->
-<div class="modal fade" id="createRoleModal" tabindex="-1" role="dialog" aria-labelledby="createRoleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="createRoleModal" tabindex="-1" role="dialog" aria-labelledby="createRoleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -113,7 +113,7 @@
   </div>
 </div>
 
-<!-- Modal Edit Role-->
+Modal Edit Role
 <div class="modal fade" id="editRoleModal" tabindex="-1" role="dialog" aria-labelledby="editRoleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -152,4 +152,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

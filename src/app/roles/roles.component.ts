@@ -4,6 +4,7 @@ import { Roles } from '../shared/models/roles';
 // Services
 import { RolesService } from '../services/roles.service';
 import { PagerService } from '../services/pager.service';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-roles',
@@ -17,6 +18,8 @@ export class RolesComponent implements OnInit {
   // paged items
   pagedItems: any[];
 
+  titleModalParent: string;
+  labelBtnSaveParent:string;
   createRoleForm: FormGroup;
   editRoleForm: FormGroup;
   statusCode: number;
@@ -98,7 +101,14 @@ export class RolesComponent implements OnInit {
     this.pagedItems = this.allRoles.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
+  showCreateModal(){
+    this.titleModalParent = 'New Role';
+    this.labelBtnSaveParent = 'Create';
+  }
+
   showEditModal(role: Roles) {
+    this.titleModalParent = 'Edit Role';
+    this.labelBtnSaveParent = 'Save';
     this.editRoleForm = this._formBuilder.group({
       'role_id': [role.role_id, Validators.required],
       'libelle': [role.libelle, Validators.required]
