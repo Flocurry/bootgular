@@ -8,11 +8,30 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">{{labelSaveBtnChild}}</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form [formGroup]="modalFormChild">
+          <fieldset>
+            <div class="form-group row">
+              <div class="offset-sm-2 col-sm-8">
+                <input formControlName="libelle" type="text" class="form-control" id="input2LibelleForm" placeholder="role">
+                <div class="alert-danger" *ngIf="!modalFormChild.controls['libelle'].valid && modalFormChild.controls['libelle'].touched">
+                  <div [hidden]="!modalFormChild.controls['libelle'].errors.required">
+                    Libelle is required.
+                  </div>
+                </div>
+                <!-- <div class="alert-danger" *ngIf="!createRoleForm.controls['libelle'].valid && createRoleForm.controls['libelle'].touched">
+                  <div [hidden]="!createRoleForm.controls['libelle'].errors.required">
+                    Libelle is required.
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </fieldset>
+          <div class="modal-footer">
+            <button [disabled]="!modalFormChild.valid" type="button" class="btn btn-primary">{{labelSaveBtnChild}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+        <!-- <p>Modal body text goes here.</p> -->
       </div>
     </div>
   </div>

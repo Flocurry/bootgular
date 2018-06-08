@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-modal',
@@ -8,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ModalComponent implements OnInit {
   @Input() titleModalChild: string;
   @Input() labelSaveBtnChild: string;
+  @Input() modalFormChild: FormGroup;
 
   constructor() { }
 

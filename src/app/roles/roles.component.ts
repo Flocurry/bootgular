@@ -20,8 +20,8 @@ export class RolesComponent implements OnInit {
 
   titleModalParent: string;
   labelBtnSaveParent:string;
-  createRoleForm: FormGroup;
-  editRoleForm: FormGroup;
+  // createRoleForm: FormGroup;
+  modalForm: FormGroup;
   statusCode: number;
   messageDelete: string;
   allRoles: Roles[] = [];
@@ -37,11 +37,10 @@ export class RolesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllRoles();
-    this.createRoleForm = this._formBuilder.group({
-      'libelle': ['', Validators.required]
-    });
-    this.editRoleForm = this._formBuilder.group({
-      'role_id': ['', Validators.required],
+    // this.createRoleForm = this._formBuilder.group({
+    //   'libelle': ['', Validators.required]
+    // });
+    this.modalForm = this._formBuilder.group({
       'libelle': ['', Validators.required]
     });
   }
