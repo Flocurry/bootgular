@@ -8,6 +8,7 @@ import { Roles } from '../shared/models/roles';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
+  // Properties input du parent component
   @Input() titleModalChild: string;
   @Input() labelSaveBtnChild: string;
   @Input() modalFormChild: FormGroup;
@@ -15,6 +16,7 @@ export class ModalComponent implements OnInit {
   @Input() editModeChild: boolean = false;
   @Input() createModeChild: boolean = false;
 
+  // Event output vers le parent component
   @Output() saveFormParent = new EventEmitter();
 
   // Closed the modal edit role after save ok

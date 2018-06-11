@@ -28,7 +28,6 @@ export class RolesComponent implements OnInit {
   allRoles: Roles[] = [];
   editRole: Roles;
   statut: boolean = false;
-  iscreated: boolean = false;
   editModeParent: boolean = false;
   createModeParent: boolean = false;
 
@@ -36,9 +35,6 @@ export class RolesComponent implements OnInit {
 
   ngOnInit() {
     this.getAllRoles();
-    // this.createRoleForm = this._formBuilder.group({
-    //   'libelle': ['', Validators.required]
-    // });
     this.modalForm = this._formBuilder.group({
       'role_id': ['', Validators.required],
       'libelle': ['', Validators.required]
@@ -72,10 +68,8 @@ export class RolesComponent implements OnInit {
   addRoles(tab) {
     let datas: FormGroup = tab[0];
     let btnClose: ElementRef = tab[1];
-    console.log(datas.value);
     this._rolesService.addRole(datas.value).subscribe(res => {
       this.statut = res['successAdd'];
-      this.iscreated = true;
       this.getAllRoles();
       // Fermer la modal
       btnClose.nativeElement.click();
@@ -104,16 +98,6 @@ export class RolesComponent implements OnInit {
         errorCode => this.statusCode = errorCode);
   }
 
-  // resetModalFormNewRole() {
-  //   this.iscreated = false;
-  //   // this.createRoleForm.reset();
-  // }
-
-  // resetModalFormEditRole() {
-  //   this.editClicked = false;
-  //   // this.editRoleForm.reset();
-  // }
-
   setPage(page: number) {
     // get pager object from service
     this.pager = this._pagerService.getPager(this.allRoles.length, page, 5);
@@ -124,6 +108,10 @@ export class RolesComponent implements OnInit {
   showCreateModal() {
     this.titleModalParent = 'New Role';
     this.labelBtnSaveParent = 'Create';
+    this.modalForm = this._formBuilder.group({
+      'role_id': ['1', Validators.required],
+      'libelle': ['', Validators.required]
+    });
     this.editModeParent = false;
     this.createModeParent = true;
   }
@@ -143,7 +131,6 @@ export class RolesComponent implements OnInit {
   editRoles(tab) {
     let datas: FormGroup = tab[0];
     let btnClose: ElementRef = tab[1];
-    console.log(datas.value);
     this._rolesService.editRole(datas.value).subscribe(res => {
       this.statut = res['successEdit'];
       // Si l'édition est ok
