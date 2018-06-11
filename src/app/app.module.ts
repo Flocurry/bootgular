@@ -23,6 +23,7 @@ import { SharingService } from "./services/sharing.service";
 import { PagerService } from "./services/pager.service";
 import { ModalComponent } from './modal/modal.component';
 import { GenderPipe } from './pipes/gender.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -60,7 +61,8 @@ const appRoutes: Routes = [
     RolesComponent,
     UsersComponent,
     ModalComponent,
-    GenderPipe
+    GenderPipe,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
