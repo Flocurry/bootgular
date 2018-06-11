@@ -29,7 +29,8 @@ export class RolesComponent implements OnInit {
   editRole: Roles;
   statut: boolean = false;
   iscreated: boolean = false;
-  editClicked: boolean = false;
+  editModeParent: boolean = false;
+  createModeParent: boolean = false;
 
   constructor(private _formBuilder: FormBuilder, private _rolesService: RolesService, private _pagerService: PagerService) { }
 
@@ -39,6 +40,7 @@ export class RolesComponent implements OnInit {
     //   'libelle': ['', Validators.required]
     // });
     this.modalForm = this._formBuilder.group({
+      'role_id': ['', Validators.required],
       'libelle': ['', Validators.required]
     });
   }
@@ -56,11 +58,21 @@ export class RolesComponent implements OnInit {
     );
   }
 
+  saveForm(tab: Array<any>) {
+    if (this.createModeParent) {
+      this.addRoles(tab);
+    }
+    else if (this.editModeParent) {
+      this.editRoles(tab);
+    }
+
+  }
   // Post new role
   // addRoles(f: NgForm) {
-  addRoles(tab: Array<any>) {
+  addRoles(tab) {
     let datas: FormGroup = tab[0];
     let btnClose: ElementRef = tab[1];
+    console.log(datas.value);
     this._rolesService.addRole(datas.value).subscribe(res => {
       this.statut = res['successAdd'];
       this.iscreated = true;
@@ -68,8 +80,12 @@ export class RolesComponent implements OnInit {
       // Fermer la modal
       btnClose.nativeElement.click();
       // On reset le formulaire
-      this.modalForm.reset();
+      this.resetForm();
     });
+  }
+
+  resetForm() {
+    this.modalForm.reset();
   }
 
   // Delete role by id
@@ -108,27 +124,33 @@ export class RolesComponent implements OnInit {
   showCreateModal() {
     this.titleModalParent = 'New Role';
     this.labelBtnSaveParent = 'Create';
+    this.editModeParent = false;
+    this.createModeParent = true;
   }
 
   showEditModal(role: Roles) {
     this.titleModalParent = 'Edit Role';
     this.labelBtnSaveParent = 'Save';
-    // this.editRoleForm = this._formBuilder.group({
-    //   'role_id': [role.role_id, Validators.required],
-    //   'libelle': [role.libelle, Validators.required]
-    // });
+    this.modalForm = this._formBuilder.group({
+      'role_id': [role.role_id, Validators.required],
+      'libelle': [role.libelle, Validators.required]
+    });
     this.editRole = role;
-    this.editClicked = true;
+    this.createModeParent = false;
+    this.editModeParent = true;
   }
 
-  editRoles(f: NgForm) {
-    this._rolesService.editRole(f.value).subscribe(res => {
+  editRoles(tab) {
+    let datas: FormGroup = tab[0];
+    let btnClose: ElementRef = tab[1];
+    console.log(datas.value);
+    this._rolesService.editRole(datas.value).subscribe(res => {
       this.statut = res['successEdit'];
       // Si l'édition est ok
       if (this.statut) {
         this.getAllRoles();
         // Fermer la modal
-        // this.closeModalEdit.nativeElement.click();
+        btnClose.nativeElement.click();
       }
     });
   }

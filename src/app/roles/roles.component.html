@@ -72,7 +72,8 @@
     </div>
   </div>
 </div>
-<app-modal (saveFormParent)='addRoles($event)' [modalFormChild]="modalForm" [titleModalChild]="titleModalParent" [labelSaveBtnChild]="labelBtnSaveParent" ></app-modal>
+<app-modal (saveFormParent)='saveForm($event)' [modalFormChild]="modalForm" [titleModalChild]="titleModalParent" [labelSaveBtnChild]="labelBtnSaveParent"
+  [editRoleChild]="editRole" [editModeChild]="editModeParent" [createModeChild]="createModeParent"></app-modal>
 <!-- Modal New Role-->
 <!-- <div class="modal fade" id="createRoleModal" tabindex="-1" role="dialog" aria-labelledby="createRoleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
