@@ -27,8 +27,8 @@
             </div>
           </fieldset>
           <div class="modal-footer">
-            <button [disabled]="!modalFormChild.valid" type="button" class="btn btn-primary">{{labelSaveBtnChild}}</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button (click)="saveForm(modalFormChild)" [disabled]="!modalFormChild.valid" type="button" class="btn btn-primary">{{labelSaveBtnChild}}</button>
+            <button #idBtnCloseModal type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </form>
         <!-- <p>Modal body text goes here.</p> -->

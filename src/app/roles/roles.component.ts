@@ -5,6 +5,7 @@ import { Roles } from '../shared/models/roles';
 import { RolesService } from '../services/roles.service';
 import { PagerService } from '../services/pager.service';
 import { ModalComponent } from '../modal/modal.component';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-roles',
@@ -19,7 +20,7 @@ export class RolesComponent implements OnInit {
   pagedItems: any[];
 
   titleModalParent: string;
-  labelBtnSaveParent:string;
+  labelBtnSaveParent: string;
   // createRoleForm: FormGroup;
   modalForm: FormGroup;
   statusCode: number;
@@ -29,9 +30,6 @@ export class RolesComponent implements OnInit {
   statut: boolean = false;
   iscreated: boolean = false;
   editClicked: boolean = false;
-
-  // Closed the modal edit role after save ok
-  @ViewChild('idBtnCloseEditModal') closeModalEdit: ElementRef;
 
   constructor(private _formBuilder: FormBuilder, private _rolesService: RolesService, private _pagerService: PagerService) { }
 
@@ -59,11 +57,18 @@ export class RolesComponent implements OnInit {
   }
 
   // Post new role
-  addRoles(f: NgForm) {
-    this._rolesService.addRole(f.value).subscribe(res => {
+  // addRoles(f: NgForm) {
+  addRoles(tab: Array<any>) {
+    let datas: FormGroup = tab[0];
+    let btnClose: ElementRef = tab[1];
+    this._rolesService.addRole(datas.value).subscribe(res => {
       this.statut = res['successAdd'];
       this.iscreated = true;
       this.getAllRoles();
+      // Fermer la modal
+      btnClose.nativeElement.click();
+      // On reset le formulaire
+      this.modalForm.reset();
     });
   }
 
@@ -83,15 +88,15 @@ export class RolesComponent implements OnInit {
         errorCode => this.statusCode = errorCode);
   }
 
-  resetModalFormNewRole() {
-    this.iscreated = false;
-    this.createRoleForm.reset();
-  }
+  // resetModalFormNewRole() {
+  //   this.iscreated = false;
+  //   // this.createRoleForm.reset();
+  // }
 
-  resetModalFormEditRole() {
-    this.editClicked = false;
-    this.editRoleForm.reset();
-  }
+  // resetModalFormEditRole() {
+  //   this.editClicked = false;
+  //   // this.editRoleForm.reset();
+  // }
 
   setPage(page: number) {
     // get pager object from service
@@ -100,7 +105,7 @@ export class RolesComponent implements OnInit {
     this.pagedItems = this.allRoles.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
-  showCreateModal(){
+  showCreateModal() {
     this.titleModalParent = 'New Role';
     this.labelBtnSaveParent = 'Create';
   }
@@ -108,10 +113,10 @@ export class RolesComponent implements OnInit {
   showEditModal(role: Roles) {
     this.titleModalParent = 'Edit Role';
     this.labelBtnSaveParent = 'Save';
-    this.editRoleForm = this._formBuilder.group({
-      'role_id': [role.role_id, Validators.required],
-      'libelle': [role.libelle, Validators.required]
-    });
+    // this.editRoleForm = this._formBuilder.group({
+    //   'role_id': [role.role_id, Validators.required],
+    //   'libelle': [role.libelle, Validators.required]
+    // });
     this.editRole = role;
     this.editClicked = true;
   }
@@ -123,7 +128,7 @@ export class RolesComponent implements OnInit {
       if (this.statut) {
         this.getAllRoles();
         // Fermer la modal
-        this.closeModalEdit.nativeElement.click();
+        // this.closeModalEdit.nativeElement.click();
       }
     });
   }

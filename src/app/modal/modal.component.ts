@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-modal',
@@ -11,9 +11,18 @@ export class ModalComponent implements OnInit {
   @Input() labelSaveBtnChild: string;
   @Input() modalFormChild: FormGroup;
 
+  @Output() saveFormParent = new EventEmitter();
+
+  // Closed the modal edit role after save ok
+  @ViewChild('idBtnCloseModal') closeModal: ElementRef;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  saveForm(f) {
+    this.saveFormParent.emit([f, this.closeModal]);
   }
 
 }
