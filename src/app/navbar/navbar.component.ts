@@ -4,6 +4,8 @@ import { LoginComponent } from '../login/login.component';
 import { Users } from '../shared/models/users';
 // Services
 import { SharingService } from '../services/sharing.service';
+// Pipes
+import { GenderPipe } from "../pipes/gender.pipe";
 
 @Component({
   selector: 'app-navbar',

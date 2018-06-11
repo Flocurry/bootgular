@@ -22,6 +22,7 @@ import { RolesService } from "./services/roles.service";
 import { SharingService } from "./services/sharing.service";
 import { PagerService } from "./services/pager.service";
 import { ModalComponent } from './modal/modal.component';
+import { GenderPipe } from './pipes/gender.pipe';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -58,7 +59,8 @@ const appRoutes: Routes = [
     SpectaclesComponent,
     RolesComponent,
     UsersComponent,
-    ModalComponent
+    ModalComponent,
+    GenderPipe
   ],
   imports: [
     BrowserModule,
