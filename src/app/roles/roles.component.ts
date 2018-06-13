@@ -37,7 +37,8 @@ export class RolesComponent implements OnInit {
     this.getAllRoles();
     this.modalForm = this._formBuilder.group({
       'role_id': ['', Validators.required],
-      'libelle': ['', Validators.required]
+      'libelle': ['', Validators.required],
+      'date_creation': ['', Validators.required],
     });
   }
 
@@ -110,7 +111,8 @@ export class RolesComponent implements OnInit {
     this.labelBtnSaveParent = 'Create';
     this.modalForm = this._formBuilder.group({
       'role_id': ['1', Validators.required],
-      'libelle': ['', Validators.required]
+      'libelle': ['', Validators.required],
+      'date_creation': ['', Validators.required]
     });
     this.editModeParent = false;
     this.createModeParent = true;
@@ -121,7 +123,8 @@ export class RolesComponent implements OnInit {
     this.labelBtnSaveParent = 'Save';
     this.modalForm = this._formBuilder.group({
       'role_id': [role.role_id, Validators.required],
-      'libelle': [role.libelle, Validators.required]
+      'libelle': [role.libelle, Validators.required],
+      'date_creation': [new Date(role.date_creation).toISOString().slice(0, -1) , Validators.required]
     });
     this.editRole = role;
     this.createModeParent = false;
