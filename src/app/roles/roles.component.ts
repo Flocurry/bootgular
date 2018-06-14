@@ -26,7 +26,6 @@ export class RolesComponent implements OnInit {
   statusCode: number;
   messageDelete: string;
   allRoles: Roles[] = [];
-  editRole: Roles;
   statut: boolean = false;
   editModeParent: boolean = false;
   createModeParent: boolean = false;
@@ -126,7 +125,6 @@ export class RolesComponent implements OnInit {
       'libelle': [role.libelle, Validators.required],
       'date_creation': [new Date(role.date_creation).toISOString().slice(0, -1) , Validators.required]
     });
-    this.editRole = role;
     this.createModeParent = false;
     this.editModeParent = true;
   }

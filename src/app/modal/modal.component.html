@@ -12,14 +12,12 @@
           <fieldset>
             <div class="form-group row">
               <div class="offset-sm-2 col-sm-8">
-                <input *ngIf="editModeChild" formControlName="role_id" type="hidden" class="form-control" value="{{editRoleChild.role_id}}">
+                <input *ngIf="editModeChild" formControlName="role_id" type="text" class="form-control">
               </div>
             </div>
             <div class="form-group row">
               <div class="offset-sm-2 col-sm-8">
-                <input *ngIf="editModeChild" formControlName="libelle" type="text" class="form-control" id="input2LibelleForm" placeholder="role"
-                  value="{{editRoleChild.libelle}}">
-                <input *ngIf="createModeChild" formControlName="libelle" type="text" class="form-control" id="input2LibelleForm" placeholder="role">
+                <input formControlName="libelle" type="text" class="form-control" placeholder="role">
                 <div class="alert-danger" *ngIf="!modalFormChild.controls['libelle'].valid && modalFormChild.controls['libelle'].touched">
                   <div [hidden]="!modalFormChild.controls['libelle'].errors.required">
                     Libelle is required.

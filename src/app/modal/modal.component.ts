@@ -14,7 +14,6 @@ export class ModalComponent implements OnInit {
   @Input() modalFormChild: FormGroup;
   @Input() editRoleChild: Roles;
   @Input() editModeChild: boolean = false;
-  @Input() createModeChild: boolean = false;
 
   // Event output vers le parent component
   @Output() saveFormParent = new EventEmitter();
