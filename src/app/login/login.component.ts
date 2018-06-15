@@ -16,6 +16,7 @@ import { SharingService } from '../services/sharing.service';
 export class LoginComponent implements OnInit {
   user: Users;
   usernameLogin: string;
+  isUserIsAdmin: boolean;
   isLoginClick: Boolean = false;
   userExist: Boolean = false;
 
@@ -37,8 +38,10 @@ export class LoginComponent implements OnInit {
         // Redirection vers home si login ok
         if(this.userExist){
           this.usernameLogin = res['username'];
+          this.isUserIsAdmin = <boolean>res['isuserisadmin'];
           this._sharingService.clearSettings('usernameLogged');
           this._sharingService.setSettings('usernameLogged', this.usernameLogin);
+          this._sharingService.setSettings('isUserIsAdmin', this.isUserIsAdmin);
           this._route.navigate(['/home']);
         }
       }
