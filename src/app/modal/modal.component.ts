@@ -31,4 +31,13 @@ export class ModalComponent implements OnInit {
     this.saveFormParent.emit([f, this.closeModal]);
   }
 
+  getCssClassInput(champ: string) {
+    if (this.modalFormChild.controls[champ].valid && this.modalFormChild.controls[champ].touched) {
+      return 'inputTxtValid';
+    }
+    if (!this.modalFormChild.controls[champ].valid && this.modalFormChild.controls[champ].touched) {
+      return 'inputTxtError';
+    }
+  }
+
 }

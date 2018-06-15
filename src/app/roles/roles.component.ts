@@ -121,9 +121,9 @@ export class RolesComponent implements OnInit {
     this.titleModalParent = 'Edit Role';
     this.labelBtnSaveParent = 'Save';
     this.modalForm = this._formBuilder.group({
-      'role_id': [role.role_id, Validators.required],
-      'libelle': [role.libelle, Validators.required],
-      'date_creation': [new Date(role.date_creation).toISOString().slice(0, -1) , Validators.required]
+      'role_id': new FormControl(role.role_id, [Validators.required]),
+      'libelle': new FormControl(role.libelle, [Validators.required, Validators.maxLength(10)]),
+      'date_creation': new FormControl(new Date(role.date_creation).toISOString().slice(0, -1), [Validators.required])
     });
     this.createModeParent = false;
     this.editModeParent = true;
