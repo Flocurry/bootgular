@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, NgForm, FormControl } from '@angular/forms';
 import { Roles } from '../shared/models/roles';
 // Services
 import { RolesService } from '../services/roles.service';
@@ -35,9 +35,9 @@ export class RolesComponent implements OnInit {
   ngOnInit() {
     this.getAllRoles();
     this.modalForm = this._formBuilder.group({
-      'role_id': ['', Validators.required],
-      'libelle': ['', Validators.required],
-      'date_creation': ['', Validators.required],
+      'role_id': new FormControl('', [Validators.required]),
+      'libelle': new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      'date_creation': new FormControl('', [Validators.required])
     });
   }
 
@@ -109,9 +109,9 @@ export class RolesComponent implements OnInit {
     this.titleModalParent = 'New Role';
     this.labelBtnSaveParent = 'Create';
     this.modalForm = this._formBuilder.group({
-      'role_id': ['1', Validators.required],
-      'libelle': ['', Validators.required],
-      'date_creation': ['', Validators.required]
+      'role_id': new FormControl('1', [Validators.required]),
+      'libelle': new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      'date_creation': new FormControl('', [Validators.required])
     });
     this.editModeParent = false;
     this.createModeParent = true;

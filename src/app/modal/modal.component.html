@@ -17,10 +17,14 @@
             </div>
             <div class="form-group row">
               <div class="offset-sm-2 col-sm-8">
-                <input formControlName="libelle" type="text" class="form-control" placeholder="role">
-                <div class="alert-danger" *ngIf="!modalFormChild.controls['libelle'].valid && modalFormChild.controls['libelle'].touched">
-                  <div [hidden]="!modalFormChild.controls['libelle'].errors.required">
+                <input [ngClass]="{inputTxtError:!modalFormChild.controls['libelle'].valid && modalFormChild.controls['libelle'].touched}"
+                  formControlName="libelle" type="text" class="form-control" placeholder="role">
+                <div class="error" *ngIf="!modalFormChild.controls['libelle'].valid && modalFormChild.controls['libelle'].touched">
+                  <div [hidden]="!modalFormChild.controls['libelle'].hasError('required')">
                     Libelle is required.
+                  </div>
+                  <div [hidden]="!modalFormChild.controls['libelle'].hasError('maxlength')">
+                    Libelle is too long (10 chars max).
                   </div>
                 </div>
               </div>
