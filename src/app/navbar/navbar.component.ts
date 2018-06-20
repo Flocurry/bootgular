@@ -15,7 +15,8 @@ import { GenderPipe } from "../pipes/gender.pipe";
 export class NavbarComponent implements OnInit {
   title: string = 'Bootgular';
   usernameLogin: string;
-  isUserIsAdmin: string; 
+  isUserIsAdmin: string;
+  userSexe: string; 
 
   constructor(private _sharingService: SharingService, private _route: Router) {
   }
@@ -23,11 +24,14 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.usernameLogin = this._sharingService.getSettings('usernameLogged');
     this.isUserIsAdmin = this._sharingService.getSettings('isUserIsAdmin');
+    this.userSexe = this._sharingService.getSettings('userSexe');
+
   }
 
   logout(){
     this._sharingService.clearSettings('usernameLogged');
     this._sharingService.clearSettings('isUserIsAdmin');
+    this._sharingService.clearSettings('userSexe');
     this._sharingService.clearSettings('token');
     this._route.navigate(['login']);
   }

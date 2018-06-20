@@ -53,7 +53,7 @@
     <div class="nav navbar-nav pull-right">
         <li class="nav-item dropdown">
           <a [appHighlight]="'blue'" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="fa fa-user"></span>   {{usernameLogin | gender:'male'}}
+            <span class="fa fa-user"></span>   {{usernameLogin | gender:userSexe}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" (click)="logout()" href="">Logout</a>
