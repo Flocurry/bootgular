@@ -1,16 +1,18 @@
 .error {
-    color: #ff0000;
+    color: #bb1c2c;
     font-size: 15px;
     margin-top: 5px;
     margin-bottom: 0;
  }
   
  .inputTxtError {
-    border: 1px solid #ff0000;
-    color: #ff0000;
+    border-left: 5px solid #bb1c2c;
+    color: #bb1c2c;
  }
 
  .inputTxtValid {
-    border: 1px solid green;
-    color: green;
+    border-left: 5px solid #20aa4e;
+    color: #20aa4e;
  }
+
+ 

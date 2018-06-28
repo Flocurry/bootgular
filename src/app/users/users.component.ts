@@ -61,7 +61,6 @@ export class UsersComponent implements OnInit {
     this.pager = this._pagerService.getPager(this.allUsers.length, page, 5);
     // get current page of items
     this.pagedItems = this.allUsers.slice(this.pager.startIndex, this.pager.endIndex + 1);
-    console.log(this.pagedItems);
   }
 
 
