@@ -18,10 +18,8 @@ export class RolesComponent implements OnInit {
   pager: any = {};
   // paged items
   pagedItems: any[];
-
   titleModalParent: string;
   labelBtnSaveParent: string;
-  // createRoleForm: FormGroup;
   modalForm: FormGroup;
   statusCode: number;
   messageDelete: string;
