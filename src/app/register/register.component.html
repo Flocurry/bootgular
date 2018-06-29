@@ -22,7 +22,7 @@
                             <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-8">
                                     <input [ngClass]="getCssClassInput('username')" formControlName="username" type="text" class="form-control" id="input2UsernameForm" placeholder="username">
-                                    <div class="alert-danger" *ngIf="!registerForm.controls['username'].valid && registerForm.controls['username'].touched">
+                                    <div *ngIf="!registerForm.controls['username'].valid && registerForm.controls['username'].touched">
                                         <div [hidden]="!registerForm.controls['username'].errors.required" class="alert alert-danger">
                                             Username is required.
                                         </div>    
@@ -32,7 +32,7 @@
                             <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-8">
                                     <input [ngClass]="getCssClassInput('firstname')" formControlName="firstname" type="text" class="form-control" id="input2FirstnameForm" placeholder="firstname">
-                                    <div class="alert-danger" *ngIf="!registerForm.controls['firstname'].valid && registerForm.controls['firstname'].touched">
+                                    <div *ngIf="!registerForm.controls['firstname'].valid && registerForm.controls['firstname'].touched">
                                         <div [hidden]="!registerForm.controls['firstname'].errors.required" class="alert alert-danger">
                                             Firstname is required.
                                         </div>    
@@ -42,7 +42,7 @@
                             <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-8">
                                     <input [ngClass]="getCssClassInput('lastname')" formControlName="lastname" type="text" class="form-control" id="input2LastnameForm" placeholder="lastname">
-                                    <div class="alert-danger" *ngIf="!registerForm.controls['lastname'].valid && registerForm.controls['lastname'].touched">
+                                    <div *ngIf="!registerForm.controls['lastname'].valid && registerForm.controls['lastname'].touched">
                                         <div [hidden]="!registerForm.controls['firstname'].errors.required" class="alert alert-danger">
                                             Lastname is required.
                                         </div>    
@@ -52,9 +52,14 @@
                             <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-8">
                                     <input [ngClass]="getCssClassInput('email')" formControlName="email" type="text" class="form-control" id="input2EmailForm" placeholder="email">
-                                    <div class="alert-danger" *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
+                                    <div *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
                                         <div [hidden]="!registerForm.controls['email'].errors.required" class="alert alert-danger">
                                             Email is required.
+                                        </div>    
+                                    </div>
+                                    <div *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
+                                        <div [hidden]="!registerForm.controls['email'].errors.pattern" class="alert alert-danger">
+                                            Email not valid.
                                         </div>    
                                     </div>
                                 </div>
@@ -62,7 +67,7 @@
                             <div class="form-group row">
                                 <div class="offset-sm-2 col-sm-8">
                                     <input [ngClass]="getCssClassInput('password')" formControlName="password" type="text" class="form-control" id="input2PasswordForm" placeholder="password">
-                                    <div class="alert-danger" *ngIf="!registerForm.controls['password'].valid && registerForm.controls['password'].touched">
+                                    <div *ngIf="!registerForm.controls['password'].valid && registerForm.controls['password'].touched">
                                         <div [hidden]="!registerForm.controls['password'].errors.required" class="alert alert-danger">
                                             Password is required.
                                         </div>    

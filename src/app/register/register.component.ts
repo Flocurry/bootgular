@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators, FormControl, EmailValidator } from '@angular/forms';
 import { Users } from '../shared/models/users';
 import { Roles } from "../shared/models/roles";
 //  Services
@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
   roleSelected: number = 1;
   statut: Boolean = false;
   iscreated: Boolean = false;
+  emailPattern: string = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   constructor(private _formBuilder: FormBuilder, private _usersService: UsersService, private _rolesService: RolesService, private _cssService: CssService) {}
 
@@ -30,7 +31,7 @@ export class RegisterComponent implements OnInit {
       'username' : new FormControl('', [Validators.required, Validators.maxLength(20)]),
       'firstname' : new FormControl('', [Validators.required, Validators.maxLength(20)]),
       'lastname' : new FormControl('', [Validators.required, Validators.maxLength(20)]),
-      'email' : new FormControl('', [Validators.required]),
+      'email' : new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
       'password' : new FormControl('', [Validators.required]),
       'role_id' : new FormControl('', [Validators.required])
     });
