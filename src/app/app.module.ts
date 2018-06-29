@@ -24,6 +24,7 @@ import { PagerService } from "./services/pager.service";
 import { ModalComponent } from './modal/modal.component';
 import { GenderPipe } from './pipes/gender.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
+import { CssService } from "./services/css.service";
 // Guards
 import { RolesGuard } from "./guards/roles.guard";
 
@@ -40,15 +41,6 @@ const appRoutes: Routes = [
   { path: 'spectacles', component: SpectaclesComponent },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  // {
-  //   path: 'user', children: [
-  //     {
-  //       path: 'list', component: UserListComponent, children: [
-  //         { path: 'detail/:name', component: UserComponent }
-  //       ]
-  //     }
-  //   ]
-  // },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ]
@@ -84,6 +76,7 @@ const appRoutes: Routes = [
     RolesService,
     SharingService,
     PagerService,
+    CssService,
     RolesGuard
   ],
   bootstrap: [AppComponent]

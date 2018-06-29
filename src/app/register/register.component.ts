@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UsersService } from "../services/users.service";
-import { RolesService } from "../services/roles.service";
+import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Users } from '../shared/models/users';
 import { Roles } from "../shared/models/roles";
+//  Services
+import { UsersService } from "../services/users.service";
+import { RolesService } from "../services/roles.service";
+import { CssService } from '../services/css.service';
 
 @Component({
   selector: 'app-register',
@@ -18,19 +20,19 @@ export class RegisterComponent implements OnInit {
   statut: Boolean = false;
   iscreated: Boolean = false;
 
-  constructor(private _formBuilder: FormBuilder, private _usersService: UsersService, private _rolesService: RolesService) {}
+  constructor(private _formBuilder: FormBuilder, private _usersService: UsersService, private _rolesService: RolesService, private _cssService: CssService) {}
 
   ngOnInit() {
     this.user = new Users();
     this.getAllRoles();
     this.user.role_id = this.roleSelected;
     this.registerForm = this._formBuilder.group({
-      'username' : ['', Validators.required],
-      'firstname' : ['', Validators.required],
-      'lastname' : ['', Validators.required],
-      'email' : ['', Validators.required],
-      'password' : ['', Validators.required],
-      'role_id' : ['', Validators.required]
+      'username' : new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      'firstname' : new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      'lastname' : new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      'email' : new FormControl('', [Validators.required]),
+      'password' : new FormControl('', [Validators.required]),
+      'role_id' : new FormControl('', [Validators.required])
     });
   }
 
@@ -52,5 +54,9 @@ export class RegisterComponent implements OnInit {
         });
       // Réinitialiser le formulaire
       this.registerForm.reset();
+  }
+
+  getCssClassInput(champ: string) {
+    return this._cssService.getCssClassInput(this.registerForm, champ);
   }
 }

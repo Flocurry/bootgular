@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Roles } from '../shared/models/roles';
+// Services
+import { CssService } from '../services/css.service';
 
 @Component({
   selector: 'app-modal',
@@ -22,7 +24,7 @@ export class ModalComponent implements OnInit {
   @ViewChild('idBtnCloseModal') closeModal: ElementRef;
 
 
-  constructor() { }
+  constructor(private _cssService: CssService) { }
 
   ngOnInit() {
   }
@@ -32,12 +34,7 @@ export class ModalComponent implements OnInit {
   }
 
   getCssClassInput(champ: string) {
-    if (this.modalFormChild.controls[champ].valid && this.modalFormChild.controls[champ].touched) {
-      return 'inputTxtValid';
-    }
-    if (!this.modalFormChild.controls[champ].valid && this.modalFormChild.controls[champ].touched) {
-      return 'inputTxtError';
-    }
+    return this._cssService.getCssClassInput(this.modalFormChild, champ);
   }
 
 }

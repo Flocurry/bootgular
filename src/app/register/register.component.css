@@ -1,0 +1,9 @@
+.inputTxtError {
+    border-left: 5px solid #bb1c2c;
+    color: #bb1c2c;
+ }
+
+ .inputTxtValid {
+    border-left: 5px solid #20aa4e;
+    color: #20aa4e;
+ }
