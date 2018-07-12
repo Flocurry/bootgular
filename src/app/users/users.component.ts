@@ -3,6 +3,7 @@ import { Users } from '../shared/models/users';
 // Services
 import { UsersService } from '../services/users.service';
 import { PagerService } from '../services/pager.service';
+import { ImageService } from '../services/image.service';
 
 @Component({
   selector: 'app-users',
@@ -21,11 +22,16 @@ export class UsersComponent implements OnInit {
   requestProcessing = false;
   articleIdToUpdate = null;
   processValidation = false;
-  constructor(private _usersService: UsersService, private _pagerService: PagerService) {
+  imgUrl: string = 'https://picsum.photos/200/300/?random';
+  imageToShow: any;
+  isImageLoading: boolean;
+
+  constructor(private _usersService: UsersService, private _pagerService: PagerService, private _imageService: ImageService) {
   }
 
   ngOnInit() {
     this.getAllUsers();
+    this.getImageFromService();
   }
 
   // Get all users
@@ -63,5 +69,26 @@ export class UsersComponent implements OnInit {
     this.pagedItems = this.allUsers.slice(this.pager.startIndex, this.pager.endIndex + 1);
   }
 
+  getImageFromService() {
+    this.isImageLoading = true;
+    this._imageService.getImage(this.imgUrl).subscribe(data => {
+      this.createImageFromBlob(data);
+      this.isImageLoading = false;
+    }, error => {
+      this.isImageLoading = false;
+      console.log(error);
+    });
+  }
+
+  createImageFromBlob(image: Blob) {
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      this.imageToShow = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
 
 }

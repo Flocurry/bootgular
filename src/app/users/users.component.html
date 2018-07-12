@@ -18,6 +18,7 @@
                   <em class="fa fa-cog"></em>
                 </th>
                 <th class="hidden-xs">ID</th>
+                <th>Image</th>
                 <th>Firstname</th>
                 <th>LastName</th>
                 <th>Email</th>
@@ -35,6 +36,7 @@
                   </button>
                 </td>
                 <td>{{user.user_id}}</td>
+                <td><img [src]="imageToShow"></td>
                 <td>{{user.firstname}}</td>
                 <td>{{user.lastname}}</td>
                 <td>{{user.email}}</td>

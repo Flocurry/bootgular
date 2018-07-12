@@ -25,6 +25,7 @@ import { ModalComponent } from './modal/modal.component';
 import { GenderPipe } from './pipes/gender.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { CssService } from "./services/css.service";
+import { ImageService } from "./services/image.service";
 // Guards
 import { RolesGuard } from "./guards/roles.guard";
 
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
     SharingService,
     PagerService,
     CssService,
+    ImageService,
     RolesGuard
   ],
   bootstrap: [AppComponent]
