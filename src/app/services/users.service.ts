@@ -46,7 +46,7 @@ export class UsersService {
    * Création d'un user
    * @param user : Objet User
    */
-  addUser (user: Users): Observable<Users> {
+  addUser (user: FormData): Observable<Users> {
     return this._http.post<Users>('http://localhost/users/save', user);
   }
 
