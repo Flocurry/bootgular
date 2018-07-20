@@ -62,4 +62,8 @@ export class UsersService {
   getUserLogged(){
     return this.userLogged;
   }
+
+  upload(file){
+    return this._http.post('http://localhost/users/upload', file);
+  }
 }

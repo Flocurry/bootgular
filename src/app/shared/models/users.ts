@@ -6,5 +6,5 @@ export class Users {
     lastname: string;
     email: string;
     role_id: number;
-    libelle: string;
+    image: File;
 }
