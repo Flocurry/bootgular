@@ -4,6 +4,7 @@ export class Users {
     password: string;
     firstname: string;
     lastname: string;
+    sexe: string;
     email: string;
     role_id: number;
     image: File;

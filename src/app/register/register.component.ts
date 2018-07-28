@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
       'username': new FormControl('', [Validators.required, Validators.maxLength(20)]),
       'firstname': new FormControl('', [Validators.required, Validators.maxLength(20)]),
       'lastname': new FormControl('', [Validators.required, Validators.maxLength(20)]),
+      'sexe': new FormControl('', [Validators.required]),
       'email': new FormControl('', [Validators.required, Validators.pattern(this.emailPattern)]),
       'password': new FormControl('', [Validators.required]),
       'image': new FormControl('', [Validators.required]),
@@ -50,10 +51,13 @@ export class RegisterComponent implements OnInit {
 
   // Post new user
   addUsers(f: NgForm) {
+      console.log(f.value);
+      
     let _formData = new FormData();
     _formData.append("username", f.value.username);
     _formData.append("firstname", f.value.firstname);
     _formData.append("lastname", f.value.lastname);
+    _formData.append("sexe", f.value.sexe);
     _formData.append("email", f.value.email);
     _formData.append("password", f.value.password);
     _formData.append("image", this.selectedFile);
