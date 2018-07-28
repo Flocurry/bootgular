@@ -32,6 +32,9 @@
                                     <div [hidden]="!registerForm.controls['username'].errors.required" class="alert alert-danger">
                                         Username is required.
                                     </div>
+                                    <div [hidden]="!registerForm.controls['username'].errors.maxlength" class="alert alert-danger">
+                                        Username is up by 20 characters.
+                                    </div>
                                 </div>
                             </div>  
                         </div>
@@ -47,6 +50,9 @@
                                 <div *ngIf="!registerForm.controls['firstname'].valid && registerForm.controls['firstname'].touched">
                                     <div [hidden]="!registerForm.controls['firstname'].errors.required" class="alert alert-danger">
                                         Firstname is required.
+                                    </div>
+                                    <div [hidden]="!registerForm.controls['firstname'].errors.maxlength" class="alert alert-danger">
+                                        Firstname is up by 20 characters.
                                     </div>
                                 </div>
                             </div>
@@ -64,6 +70,9 @@
                                     <div [hidden]="!registerForm.controls['lastname'].errors.required" class="alert alert-danger">
                                         Lastname is required.
                                     </div>
+                                    <div [hidden]="!registerForm.controls['lastname'].errors.maxlength" class="alert alert-danger">
+                                        Lastname is up by 20 characters.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,14 +87,12 @@
                             <div class="offset-sm-2 col-sm-8">
                                 <div *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
                                     <div [hidden]="!registerForm.controls['email'].errors.required" class="alert alert-danger">
-                                            Email is required.
+                                        Email is required.
                                     </div>
+                                    <div [hidden]="!registerForm.controls['email'].errors.pattern" class="alert alert-danger">
+                                        Email not valid.
                                     </div>
-                                    <div *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">
-                                        <div [hidden]="!registerForm.controls['email'].errors.pattern" class="alert alert-danger">
-                                            Email not valid.
-                                        </div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -93,7 +100,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="fa fa-lock text-info"></i></div>
                                 </div>
-                                <input [ngClass]="getCssClassInput('password')" formControlName="password" type="text" class="form-control" id="input2PasswordForm"
+                                <input [ngClass]="getCssClassInput('password')" formControlName="password" type="password" class="form-control" id="input2PasswordForm"
                                     placeholder="password">
                             </div>
                             <div class="offset-sm-2 col-sm-8">
