@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   iscreated: Boolean = false;
   emailPattern: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   selectedFile: File;
+  imageSrc: string;
 
   constructor(private _formBuilder: FormBuilder, private _usersService: UsersService, private _rolesService: RolesService, private _cssService: CssService) { }
 
@@ -75,6 +76,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+        this.selectedFile = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = e => this.imageSrc = reader.result;
+        reader.readAsDataURL(this.selectedFile);
+    }
   }
 }

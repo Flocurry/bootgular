@@ -11,3 +11,21 @@
  #radioFemme {
     margin-left: 20px;
  }
+ .wrapper {
+    width:150px;
+    height:150px;
+    margin: 25px auto;
+    overflow: hidden;
+    border-radius:50%;
+    position: relative;
+  }
+  
+.wrapper img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-height: 100%;
+    max-width: 100%;
+    transform: translate(-50%, -50%);
+}
