@@ -52,8 +52,6 @@ export class RegisterComponent implements OnInit {
 
   // Post new user
   addUsers(f: NgForm) {
-      console.log(f.value);
-      
     let _formData = new FormData();
     _formData.append("username", f.value.username);
     _formData.append("firstname", f.value.firstname);
