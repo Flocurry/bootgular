@@ -16,8 +16,13 @@
               </div>
             </div>
             <div class="form-group row">
-              <div class="offset-sm-2 col-sm-8">
+              <div class="input-group offset-sm-2 col-sm-8">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user-circle text-info"></i></div>
+                </div>
                 <input [ngClass]="getCssClassInput('libelle')" formControlName="libelle" type="text" class="form-control" placeholder="role">
+              </div>
+              <div class="offset-sm-2 col-sm-8">
                 <div class="error" *ngIf="!modalFormChild.controls['libelle'].valid && modalFormChild.controls['libelle'].touched">
                   <div [hidden]="!modalFormChild.controls['libelle'].hasError('required')" class="alert alert-danger">
                     Libelle is required.
@@ -29,8 +34,13 @@
               </div>
             </div>
             <div class="form-group row">
-              <div class="offset-sm-2 col-sm-8">
+              <div class="input-group offset-sm-2 col-sm-8">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-calendar text-info"></i></div>
+                </div>
                 <input [ngClass]="getCssClassInput('date_creation')" formControlName="date_creation" type="datetime-local" class="form-control">
+              </div>
+              <div class="offset-sm-2 col-sm-8">
                 <div class="error" *ngIf="!modalFormChild.controls['date_creation'].valid && modalFormChild.controls['date_creation'].touched">
                   <div [hidden]="!modalFormChild.controls['date_creation'].hasError('required')" class="alert alert-danger">
                     Good format date is required.
