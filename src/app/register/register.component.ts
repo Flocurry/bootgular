@@ -81,4 +81,9 @@ export class RegisterComponent implements OnInit {
         reader.readAsDataURL(this.selectedFile);
     }
   }
+
+  deleteImage(){
+    this.imageSrc = "";
+    this.registerForm.controls['image'].reset();
+  }
 }

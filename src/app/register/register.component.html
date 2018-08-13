@@ -135,10 +135,14 @@
                         <div class="form-group row">
                             <div class="offset-sm-2 col-sm-8">
                                 <div class="custom-file" id="customFile" lang="es">
-                                    <input type="file" accept="image/png" class="custom-file-input" formControlName="image" (change)="onFileChanged($event)">
-                                    <label class="custom-file-label" for="exampleInputFile">
-                                        Select your avatar...
-                                    </label>
+                                    <div class="input-group">
+                                        <input type="file" accept="image/png" class="form-control" formControlName="image" (change)="onFileChanged($event)">
+                                        <span class="input-group-btn">
+                                            <button type="button" (click)="deleteImage()" class="btn btn-danger">
+                                                <em class="fa fa-trash"></em>
+                                            </button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
