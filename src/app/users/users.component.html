@@ -28,10 +28,7 @@
             <tbody>
               <tr *ngFor='let user of pagedItems'>
                 <td align="center">
-                  <a class="btn btn-default">
-                    <em class="fa fa-pencil"></em>
-                  </a>
-                  <button (click)="deleteUsers(user)" class="btn btn-danger">
+                  <button *ngIf="!user.is_connected" (click)="deleteUsers(user)" class="btn btn-danger">
                     <em class="fa fa-trash"></em>
                   </button>
                 </td>

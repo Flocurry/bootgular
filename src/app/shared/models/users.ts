@@ -8,4 +8,5 @@ export class Users {
     email: string;
     role_id: number;
     image: File;
+    is_connected: boolean;
 }

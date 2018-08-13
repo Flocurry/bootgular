@@ -50,6 +50,10 @@ export class UsersService {
     return this._http.post<Users>('http://localhost/users/save', user);
   }
 
+  logout(user: Users){
+    return this._http.put<Users>('http://localhost/users/logout', user);
+  }
+
   private handleError (error: Response | any) {
     console.error('UsersService::handleError', error);
     return Observable.throw(error);

@@ -4,6 +4,7 @@ import { LoginComponent } from '../login/login.component';
 import { Users } from '../shared/models/users';
 // Services
 import { SharingService } from '../services/sharing.service';
+import { UsersService } from '../services/users.service';
 // Pipes
 import { GenderPipe } from "../pipes/gender.pipe";
 
@@ -14,25 +15,30 @@ import { GenderPipe } from "../pipes/gender.pipe";
 })
 export class NavbarComponent implements OnInit {
   title: string = 'Bootgular';
-  usernameLogin: string;
-  isUserIsAdmin: string;
-  userSexe: string; 
+  userConnected: Users;
 
-  constructor(private _sharingService: SharingService, private _route: Router) {
+  constructor(private _usersService: UsersService, private _sharingService: SharingService, private _route: Router) {
   }
 
   ngOnInit() {
-    this.usernameLogin = this._sharingService.getSettings('usernameLogged');
-    this.isUserIsAdmin = this._sharingService.getSettings('isUserIsAdmin');
-    this.userSexe = this._sharingService.getSettings('userSexe');
-
+    this.userConnected = JSON.parse(this._sharingService.getSettings('userConnected'))[0];
   }
 
   logout(){
-    this._sharingService.clearSettings('usernameLogged');
-    this._sharingService.clearSettings('isUserIsAdmin');
-    this._sharingService.clearSettings('userSexe');
-    this._sharingService.clearSettings('token');
-    this._route.navigate(['login']);
+    this.userConnected.is_connected = false;
+    this._usersService.logout(this.userConnected).subscribe(
+      res => {
+        this._sharingService.cleanAll();
+        this._route.navigate(['login']);
+      }
+    );
+  }
+
+  isAdmin(){
+    let isAdmin:boolean = false;
+    if(this.userConnected.role_id === 1){
+      isAdmin = true;
+    }
+    return isAdmin;
   }
 }
