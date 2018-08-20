@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit {
         this._sharingService.clearSettings('token');
         this._sharingService.setSettings('token', this.cookieService.get('XSRF-TOKEN'));
         this.isLoginClick = true;
-        if (datas) {
+        if (!this.isEmpty(datas)) {
+          this.userExist = true;
           // On stocke en session le user (on le stringify)
           this._sharingService.setSettings('userConnected', JSON.stringify(this.user));
           // Redirection vers home si login ok
@@ -44,5 +45,12 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
+  
+  isEmpty(obj) {
+    for(var prop in obj) {
+      if(obj.hasOwnProperty(prop))
+        return false;
+    }
+    return true;
+  }
 }
