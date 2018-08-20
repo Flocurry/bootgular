@@ -3,18 +3,19 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { Observable } from 'rxjs/Observable';
 // Services
 import { SharingService } from '../services/sharing.service';
+import { UsersService } from '../services/users.service';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-
-  constructor(private _sharingService: SharingService, private _router: Router) { }
+  constructor(private _sharingService: SharingService, private _usersService: UsersService, private _router: Router) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       console.log('I am checking to see if you can view this page');
       let canAccess = false;
-      if(this._sharingService.getSettings('isUserIsAdmin') === 'true'){
+      let userConnected = JSON.parse(this._sharingService.getSettings('userConnected'))[0];
+      if(this._usersService.isAdmin(userConnected)){
         canAccess = true;
       }
       else{

@@ -35,10 +35,6 @@ export class NavbarComponent implements OnInit {
   }
 
   isAdmin(){
-    let isAdmin:boolean = false;
-    if(this.userConnected.role_id === 1){
-      isAdmin = true;
-    }
-    return isAdmin;
+    return this._usersService.isAdmin(this.userConnected);
   }
 }

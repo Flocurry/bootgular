@@ -70,4 +70,12 @@ export class UsersService {
   upload(file){
     return this._http.post('http://localhost/users/upload', file);
   }
+
+  isAdmin(userConnected){
+    let isAdmin:boolean = false;
+    if(userConnected.role_id === 1){
+      isAdmin = true;
+    }
+    return isAdmin;
+  }
 }
